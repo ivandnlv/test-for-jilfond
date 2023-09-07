@@ -1,16 +1,39 @@
-import { createStore, type MutationTree } from 'vuex'
+import { createStore, type ActionContext, type MutationTree } from 'vuex'
+import { type User } from '@/types'
+import { getUserById, getUserByIdOrName } from '@/services'
+
+export interface RootState {
+  state: State
+}
 
 export interface State {
   searchValue: string | null
+  employee: User | null
+  results: User[] | null
+  employeeStatus: Statuses
+  employeeError: string | null
+  resultsStatus: Statuses
+  resultsError: string | null
+}
+
+const initialState: State = {
+  employee: null,
+  employeeError: null,
+  employeeStatus: 'nothing',
+  results: null,
+  resultsError: null,
+  resultsStatus: 'nothing',
+  searchValue: null
 }
 
 interface Mutations {
   changeSearch: (state: State, payload: string) => void
+  resetState: (state: State) => void
 }
 
-const state: State = {
-  searchValue: null
-}
+type Statuses = 'loading' | 'error' | 'success' | 'nothing'
+
+const state: State = JSON.parse(JSON.stringify(initialState))
 
 const mutations: MutationTree<State> & Mutations = {
   changeSearch(state, payload) {
@@ -19,16 +42,63 @@ const mutations: MutationTree<State> & Mutations = {
     } else {
       state.searchValue = null
     }
+  },
+  resetState(state) {
+    state = initialState
   }
 }
 
-const actions = {}
+type ActionsContext = ActionContext<State, any>
 
-const getters = {}
+const actions = {
+  async fetchUsersForResults({ state }: ActionsContext) {
+    state.resultsStatus = 'loading'
+
+    state.results = initialState.results
+    state.resultsError = initialState.resultsError
+    try {
+      const results = await getUserByIdOrName(state.searchValue ?? '')
+
+      state.results = results
+
+      state.resultsStatus = 'success'
+    } catch (error) {
+      state.resultsStatus = 'error'
+      if (error instanceof Error) {
+        state.resultsError = error.message
+      } else {
+        state.resultsError = 'Произошла неизвестная ошибка'
+      }
+    }
+  },
+  async fetchUserForEmployee({ state }: ActionsContext, id: number) {
+    state.employeeStatus = 'loading'
+
+    state.employee = initialState.employee
+    state.employeeError = initialState.employeeError
+
+    try {
+      const employee = await getUserById(id)
+
+      state.employee = employee
+
+      state.employeeStatus = 'success'
+      console.log(state.employee)
+    } catch (error) {
+      state.employeeStatus = 'error'
+      if (error instanceof Error) {
+        state.employeeError = error.message
+      } else {
+        state.employeeError = 'Произошла неизвестная ошибка'
+      }
+    }
+  }
+}
 
 const store = createStore({
   state,
-  mutations
+  mutations,
+  actions
 })
 
 export default store

@@ -2,7 +2,9 @@
   "files": [],
   "compilerOptions": {
     "moduleResolution": "node",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "strict": true
   },
   "references": [
     {

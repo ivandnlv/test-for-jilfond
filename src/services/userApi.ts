@@ -7,14 +7,20 @@ const myAxios = axios.create({
 
 async function getUserByIdOrName(value: number | string) {
   if (Number(value)) {
-    const { data }: { data: User } = await myAxios.get(`?id=${value}`)
+    const { data }: { data: User[] } = await myAxios.get(`?id=${value}`)
 
     return data
   } else {
-    const { data }: { data: User } = await myAxios.get(`?name=${value}`)
+    const { data }: { data: User[] } = await myAxios.get(`?name=${value}`)
 
     return data
   }
 }
 
-export { getUserByIdOrName }
+async function getUserById(value: number) {
+  const { data }: { data: User } = await myAxios.get(`${value}`)
+
+  return data
+}
+
+export { getUserByIdOrName, getUserById }

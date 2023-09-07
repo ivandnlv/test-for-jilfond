@@ -21,7 +21,7 @@ const searchValue = computed({
 
 <style lang="scss" scoped>
 .search {
-  margin-top: 22px;
+  width: 100%;
   outline: none;
   padding: 16px;
   font-size: 14px;
