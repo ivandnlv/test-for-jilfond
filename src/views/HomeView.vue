@@ -17,7 +17,7 @@ import TheHeader from '@/components/TheHeader.vue'
 <style lang="scss" scoped>
 .container {
   max-width: 1266px;
-  margin: 0 auto;
+  margin: 0 auto 46px auto;
   @media (max-width: 1300px) {
     max-width: 1100px;
   }
