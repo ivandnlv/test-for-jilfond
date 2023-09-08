@@ -1,46 +1,17 @@
-# .
+# Тестовое задание для компании "Жилфонд"
 
-This template should help get you started developing with Vue 3 in Vite.
+Небольшое веб-приложение, которое взаимодействует с jsonplaceholder api
 
-## Recommended IDE Setup
+Стэк:
+- vue 3 (script setup);
+- typescript;
+- scss (scoped styles);
+- Vuex;
+- Axios.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+![image](https://github.com/ivandnlv/test-for-jilfond/assets/91759945/728a431a-f3d5-4df9-9d80-41fc8398c048)
 
-## Type Support for `.vue` Imports in TS
+## Задание: 
+![image](https://github.com/ivandnlv/test-for-jilfond/assets/91759945/25368909-3e8f-46e0-9f5e-7a3eb069ab2f)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+![image](https://github.com/ivandnlv/test-for-jilfond/assets/91759945/85986d05-23d6-4ad8-8ada-009f1a58f1aa)
