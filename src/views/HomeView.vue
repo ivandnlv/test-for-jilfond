@@ -18,6 +18,9 @@ import TheHeader from '@/components/TheHeader.vue'
 .container {
   max-width: 1266px;
   margin: 0 auto;
+  @media (max-width: 1300px) {
+    max-width: 1100px;
+  }
 }
 
 .main {
