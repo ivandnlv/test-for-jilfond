@@ -44,7 +44,13 @@ const mutations: MutationTree<State> & Mutations = {
     }
   },
   resetState(state) {
-    state = initialState
+    state.employee = initialState.employee
+    state.employeeError = initialState.employeeError
+    state.employeeStatus = initialState.employeeStatus
+    state.results = initialState.results
+    state.resultsError = initialState.resultsError
+    state.resultsStatus = initialState.resultsStatus
+    state.searchValue = initialState.searchValue
   }
 }
 
@@ -69,6 +75,8 @@ const actions = {
       } else {
         state.resultsError = 'Произошла неизвестная ошибка'
       }
+    } finally {
+      if (!state.searchValue) state.resultsStatus = 'nothing'
     }
   },
   async fetchUserForEmployee({ state }: ActionsContext, id: number) {
@@ -83,7 +91,6 @@ const actions = {
       state.employee = employee
 
       state.employeeStatus = 'success'
-      console.log(state.employee)
     } catch (error) {
       state.employeeStatus = 'error'
       if (error instanceof Error) {

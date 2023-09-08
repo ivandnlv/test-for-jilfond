@@ -1,6 +1,7 @@
 <template>
   <div class="employee">
-    <div class="employee__content" v-if="employee">
+    <button class="btn" @click="onBackClick" v-if="status !== 'nothing'">Сбросить</button>
+    <div class="employee__content" v-if="status === 'success' && employee">
       <div class="wrapper">
         <div class="employee__content-image">
           <img src="/images/no-image-big.png" alt="no-image" />
@@ -15,13 +16,16 @@
           </p>
         </div>
       </div>
-      <button class="back" @click="onBackClick">Назад</button>
     </div>
     <div class="employee__empty" v-else>
-      <p v-if="!employee && searchValue">Выберите сотрудника, чтобы посмотреть его профиль</p>
-      <p v-if="!employee && !searchValue">
+      <p v-if="searchValue && status === 'nothing'">
+        Выберите сотрудника, чтобы посмотреть его профиль
+      </p>
+      <p v-if="!searchValue && status === 'nothing'">
         Для начала, найдите сотрудника, воспользовавшись поиском
       </p>
+      <p v-if="status === 'loading'">Загружаем данные о сотруднике...</p>
+      <p class="error" v-if="status === 'error' && error">Произошла ошибка: {{ error }}</p>
     </div>
   </div>
 </template>
@@ -34,6 +38,8 @@ import { useStore } from 'vuex'
 const store = useStore<State>()
 
 const employee = computed(() => store.state.employee)
+const status = computed(() => store.state.employeeStatus)
+const error = computed(() => store.state.employeeError)
 const searchValue = computed(() => store.state.searchValue)
 
 const onBackClick = () => {
@@ -49,6 +55,7 @@ p {
   font-size: 14px;
   font-weight: 400;
 }
+
 .employee {
   width: 100%;
   height: 100%;

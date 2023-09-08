@@ -6,6 +6,7 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { type State } from '@/store'
+import { searchFormatter } from '@/utils'
 
 const store = useStore<State>()
 
@@ -14,7 +15,7 @@ const searchValue = computed({
     return store.state.searchValue ?? ''
   },
   set(value) {
-    store.commit('changeSearch', value)
+    store.commit('changeSearch', searchFormatter(value))
   }
 })
 </script>

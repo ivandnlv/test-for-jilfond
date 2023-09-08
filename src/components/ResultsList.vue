@@ -15,18 +15,19 @@
     <div v-else-if="status === 'nothing'" class="results__empty">
       <p>Для начала, воспользуйтесь поиском</p>
     </div>
-    <div v-if="status === 'error'" class="results__error">
-      <p>{{ error }}</p>
+    <div v-if="status === 'error'" class="error">
+      <p>Произошла ошибка: {{ error }}</p>
     </div>
     <div v-if="status === 'loading'">
       <p>Загрузка...</p>
     </div>
+    <button class="btn results__btn" v-if="status === 'error'" @click="onBtnClick">Сбросить</button>
   </div>
 </template>
 
 <script lang="ts" setup>
 import type { State } from '@/store'
-import { computed, watch } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 import ResultsItem from './ResultsItem.vue'
 
@@ -36,7 +37,9 @@ const results = computed(() => store.state.results)
 const status = computed(() => store.state.resultsStatus)
 const error = computed(() => store.state.resultsError)
 
-watch(results, () => console.log(results))
+const onBtnClick = () => {
+  store.commit('resetState')
+}
 </script>
 
 <style lang="scss" scoped>
@@ -52,13 +55,9 @@ p {
     flex-direction: column;
     gap: 22px;
   }
-  &__error {
-    background: red;
-    padding: 10px;
-    border-radius: 5px;
-    p {
-      color: #fff;
-    }
+  &__btn {
+    margin-top: 10px;
+    margin-left: 0;
   }
 }
 </style>

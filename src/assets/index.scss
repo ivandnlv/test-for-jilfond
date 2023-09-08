@@ -12,3 +12,31 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.error {
+  background: red;
+  padding: 10px;
+  color: #fff;
+  border-radius: 5px;
+  p {
+    color: #fff !important;
+  }
+}
+
+.btn {
+  cursor: pointer;
+  border: 1.5px solid #e9ecef;
+  margin-left: 27px;
+  background: none;
+  border-radius: 5px;
+  padding: 5px;
+  transition:
+    background 0.2s ease-in-out,
+    opacity 0.2s ease-in-out;
+  &:hover {
+    opacity: 0.7;
+  }
+  &:active {
+    background: darken(#fff, 15%);
+  }
+}
